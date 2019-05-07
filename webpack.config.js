@@ -9,6 +9,17 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.tag$/,
+        exclude: /node_modules/,
+        use: [{
+          loader: 'riot-tag-loader',
+          options: {
+            hot: true,
+            type: 'es6'
+          }
+        }]
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
