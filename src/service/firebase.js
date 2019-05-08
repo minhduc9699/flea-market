@@ -5,6 +5,18 @@ init()
 
 const db = firebase.firestore();
 
+firebase.storage().ref().constructor.prototype.putFiles = function (files) {
+  var ref = this;
+  return Promise.all(
+    Object.values(files).map(function (file) {
+      return ref
+        .child(`${shortid.generate()}-${file.name}`)
+        .put(file)
+        .then((r) => r.ref.getDownloadURL());
+    }),
+  );
+};
+
 class FirebaseModel {
   constructor(collectionName) {
     this.collection = db.collection(collectionName)
@@ -39,6 +51,7 @@ class FirebaseModel {
 
 const model = {
   userProfile: new FirebaseModel("userProfiles"),
+  product: new FirebaseModel("products"),
 }
 
 
@@ -61,6 +74,35 @@ const signUp = async (lastName, firstName, phoneNumber, email, password) => {
 };
 
 
+const uploadFile = async (
+category, 
+emotion,
+title,
+files,
+price,
+description,
+reason,
+additionalInfo
+) => {
+  const ref = firebase.storage().ref();
+  let imgUrls = [];
+  if (files.length > 0) imgUrls = await ref.putFiles(files);
+  const data = {
+    category,
+    emotion,
+    title,
+    price,
+    description,
+    reason,
+    additionalInfo,
+    imgUrls,
+    searchString: getUnicodeText(),
+    userRef: firebase.auth().currentUser.uid,
+    createdAt: new Date().toISOString(),
+  };
+
+  return model.product.save(data)
+};
 
 export default {
   signUp

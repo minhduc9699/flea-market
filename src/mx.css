@@ -745,8 +745,12 @@
 }
 }
 
+.text-center {
+  text-align: center;
+}
+
 .container {
-    padding: 0 0.5rem;
+  padding: 0 0.5rem;
 }
 
 .no-margin {
