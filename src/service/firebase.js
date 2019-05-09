@@ -1,6 +1,7 @@
 import firebase from 'firebase';
-import { init } from "./fb"
-
+import { init } from "./fb";
+import shortid from 'shortid';
+import {getUnicodeText } from "../utils"
 init()
 
 const db = firebase.firestore();
@@ -42,9 +43,15 @@ class FirebaseModel {
     return data
   }
 
-  async save(data) {
-    await this.collection.doc().set(data)
-    return data
+  save(data) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        await this.collection.doc().set(data);
+        resolve(data);
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 }
 
@@ -74,16 +81,15 @@ const signUp = async (lastName, firstName, phoneNumber, email, password) => {
 };
 
 
-const uploadFile = async (
-category, 
-emotion,
-title,
-files,
-price,
-description,
-reason,
-additionalInfo
-) => {
+const uploadFile = async ({
+  category,
+  emotion,
+  title,
+  files,
+  price,
+  description,
+  reason,
+}) => {
   const ref = firebase.storage().ref();
   let imgUrls = [];
   if (files.length > 0) imgUrls = await ref.putFiles(files);
@@ -94,10 +100,9 @@ additionalInfo
     price,
     description,
     reason,
-    additionalInfo,
     imgUrls,
-    searchString: getUnicodeText(),
-    userRef: firebase.auth().currentUser.uid,
+    searchString: getUnicodeText(`${title} ${emotion} ${category}`),
+    // userRef: firebase.auth().currentUser.uid,
     createdAt: new Date().toISOString(),
   };
 
@@ -105,5 +110,6 @@ additionalInfo
 };
 
 export default {
-  signUp
+  signUp,
+  uploadFile
 }

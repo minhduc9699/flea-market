@@ -32,7 +32,8 @@
     "riot-tag-loader": "^2.1.0",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.1",
-    "webpack-dev-server": "^3.3.1"
+    "webpack-dev-server": "^3.3.1",
+    "yup": "^0.27.0"
   },
   "dependencies": {
     "firebase": "^5.10.0",

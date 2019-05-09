@@ -231,6 +231,15 @@ textarea::placeholder ,input::placeholder {
   padding: 0;
 }
 
+.file-select .preview {
+  display: none;
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+
 input[type="radio"] {
   height: auto;
 }
@@ -294,4 +303,10 @@ ul {
 
 .media li {
   margin-left: 35px;
+}
+
+p .error-message {
+  font-weight: 500;
+  line-height: 130%;
+  color:#EB5757;
 }
