@@ -2,7 +2,7 @@
   <div class="col-5">
     <div class="text-center">
       <h1> before you sell it... </h1>
-      <p> Let us ask you a few questions </p>
+      <p class="text-grey text-125"> Let us ask you a few questions </p>
     </div>
     <div class="box emotion">
       <p>How do you feel right now?</p>
@@ -78,6 +78,7 @@
       <div class="form-group required">
         <p>Select category</p>
         <select>
+          <option selected></option>
           <option>Horn</option>
           <option>Horn</option>
           <option>Horn</option>
@@ -85,6 +86,20 @@
         </select>
         <!-- <p class="error-message">Max. 100 characters</p> -->
       </div>
+      <div class="form-group">
+        <p>What are you selling?</p>
+        <textarea type="text" name="title" id="title" placeholder="Write something nice here"></textarea>
+        <!-- <p class="error-message">Max. 100 characters</p> -->
+      </div>
+      <div class="form-group">
+        <p>Why do you sell it?</p>
+        <textarea type="text" name="title" id="title" placeholder="Write something nice here"></textarea>
+        <!-- <p class="error-message">Max. 100 characters</p> -->
+      </div>
+    </div>
+
+    <div class="text-center submit">
+      <button class="button">sell it</button>
     </div>
   </div>
 </upload>

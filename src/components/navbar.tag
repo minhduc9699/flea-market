@@ -1,9 +1,9 @@
 <navbar>
-  <nav class="navbar grid-middle-spaceBetween fullwidth">
-    <div class="nav-brand">
+  <nav class="navbar grid fullwidth">
+    <div class="nav-brand grid-middle-left col-4">
       <img src="/assets/logo.png" />
     </div>
-    <ul class="nav-menu middle-menu grid-spaceBetween">
+    <ul class="nav-menu middle-menu grid-middle-center col-4">
       <li class="nav-item active">
         <a href="#">
           Buy it
@@ -20,7 +20,7 @@
         </a>
       </li>
     </ul>
-    <ul class="nav-menu right-menu grid-spaceBetween">
+    <ul class="nav-menu right-menu grid-middle-right col-4">
       <li class="nav-item">
         <img id="search" src="/assets/search.png" />
       </li>

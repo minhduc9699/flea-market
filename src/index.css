@@ -18,9 +18,23 @@ h1 {
   color: var(--dark-light-gray);
 }
 
-.text-center p {
-  font-size: 1.25rem;
+
+.text-grey {
   color: var(--light-grey)
+}
+
+.text-125 {
+  font-size: 1.25rem;
+}
+
+.text-115 {
+  font-size: 1.15rem;
+}
+
+p.text-115 {
+  margin-top: 4px;
+  color: #828282;
+  line-height: 17px;
 }
 
 body,
@@ -29,31 +43,26 @@ html {
 }
 
 nav.navbar {
-    height: 70px;
-    padding: 0 80px;
-    margin: 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 9999;
-    background: var(--white);
-    font-size: 1.125rem;
-    font-weight: 500;
-    text-align: center;
+  height: 70px;
+  padding: 0 80px;
+  margin: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background: var(--white);
+  font-size: 1.125rem;
+  font-weight: 500;
+  text-align: center;
 }
 
 .nav-brand img {
     height: 100%;
 }
 
-.nav-menu {
-    padding: 0;
-    list-style: none;
-}
-
 .nav-menu .nav-item a {
-    text-decoration: none;
-    color: var(--dark-gray);
+  text-decoration: none;
+  color: var(--dark-gray);
 }
 
 .middle-menu .nav-item a {
@@ -146,6 +155,7 @@ upload.upload {
 
 .upload-form {
   padding: 40px 60px;
+  margin-bottom: 0px;
 }
 
 .upload-form p {
@@ -164,18 +174,30 @@ upload.upload {
 }
 
 input,
-select {
-  padding: 16px;
+select,
+textarea {
+  height: 54px;
   width: -webkit-fill-available;
   border: 1px solid #E0E0E0;
   border-radius: 4px;
+  font-weight: 500;
+  line-height: 130%;
+  font-size: 1rem;
+  box-sizing: border-box;
+  padding: 16px;
 }
 
-input::placeholder {
+textarea {
+  resize: none;
+  height: 107px;
+}
+
+textarea::placeholder ,input::placeholder {
   color: #BDBDBD;
   line-height: 130%;
   font-weight: 500;
 }
+
 
 .form-group {
   margin-bottom: 24px;
@@ -209,12 +231,21 @@ input::placeholder {
   padding: 0;
 }
 
+input[type="radio"] {
+  height: auto;
+}
+
 select {
   position: relative;
   background: transparent;
-  appearance: none;
-  -webkit-appearance: none;
   -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  background-image: url("/assets/arrow.png");
+  background-position: right .7em top 50%, 0 0;
+  background-repeat: no-repeat;
+
 }
 
 select::after {
@@ -223,5 +254,44 @@ select::after {
   display: block;
   width: 3px;
   height: 3px;
+}
 
+.button {
+  background: var(--green);
+  border: 1px solid var(--green);
+  box-sizing: border-box;
+  border-radius: 88px;
+  width: -webkit-fill-available;
+  padding: 16px;
+  font-size: 1.25rem;
+  color: #F2F2F2;
+  text-transform: capitalize;
+}
+
+.submit {
+  padding: 40px 60px;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+.footer{
+  background: var(--dark-light-grey);
+  padding: 24px 80px 16px;
+  color: #BDBDBD;
+}
+
+.copyright{
+  padding-bottom: 0;
+}
+
+.footer a {
+  text-decoration: none;
+  color: #BDBDBD;
+}
+
+.media li {
+  margin-left: 35px;
 }
