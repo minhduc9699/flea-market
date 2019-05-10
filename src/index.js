@@ -19,17 +19,20 @@ const root = document.getElementById("root");
 
 // riot.mount("*");
 route.base("#");
-riot.mount("*");
-route("/", () => {
-  console.log("Home page");
+riot.mount("*", {});
+route("/", async () => {
   root.innerHTML = "<app></app>";
-  riot.mount("app", {});
+  const query = route.query();
+  riot.mount("app", {
+    showAllProduct: service.paginate,
+    categories : ["All Products", "Accessories", "Boys Stuff", "Bridal", "Girls Stuff", "Jewelry", "Weird Stuff", "Random Stuff"],
+    emotions : ["All Emotions", "Heartbroken", "Shocked", "Angry", "On The Rebound", "Better Than Ever"],
   });
+});
 
 route("/upload", () => {
   root.innerHTML = "<upload></upload>";
   riot.mount("upload");
-
   const schema = yup.object().shape({
     title: yup.string().required("title is required").max(100),
     category: yup.string().required("category is required"),
@@ -40,7 +43,8 @@ route("/upload", () => {
     reason: yup.string()
   });
 
-  document.getElementById('submit-button').addEventListener('click',async () => {
+  document.getElementById('product-form').addEventListener('submit',async (e) => {
+    e.preventDefault();
     const files = [];
     document.querySelectorAll('[name*="files"]').forEach((elem) => {
       if (elem.files[0]) {
@@ -80,7 +84,7 @@ route("/upload", () => {
         } else elem.innerText = '';
       });
     } else {
-      service.uploadFile(formData).then(r => console.log(r));
+      service.uploadFile(formData).then(r => window.location.reload());
     }
 
   });

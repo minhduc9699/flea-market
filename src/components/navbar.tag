@@ -36,4 +36,7 @@
       </li>
     </ul>
   </nav>
+
+  <script>
+  </script>
 </navbar>

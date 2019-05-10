@@ -48,7 +48,7 @@ const main = async() => {
   const snapshot = await topicCollection
     .where("title", "==", "Giới hạn của dãy số")
     .get();
-  
+}
   const id = snapshot.docs[0].id;
   
   const firstDoc = snapshot.first();
@@ -72,7 +72,6 @@ const main = async() => {
   });
 
 
-};
 
 main();
 

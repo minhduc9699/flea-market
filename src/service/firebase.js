@@ -23,9 +23,9 @@ class FirebaseModel {
     this.collection = db.collection(collectionName)
   }
 
-  async getAll() {
+  getAll() {
     const data = []
-    await this.collection.get().then(query => {
+    this.collection.get().then(query => {
       query.forEach(doc => {
         const snapshot = doc.data()
         snapshot._id = doc.id
@@ -33,6 +33,45 @@ class FirebaseModel {
       });
     });
     return data
+  }
+
+  async count(res) {
+    const r = await res.get();
+    return r.docs.length;
+  }
+  
+  async paginate(query, pageNumber, perPage) {
+    const data = [];
+    const queryValue = [];
+    let res = this.collection;
+
+    for (let key in query) {
+      res = res.orderBy(key);
+      queryValue.push(query[key]);
+    }
+
+    if(queryValue.length > 0) {
+      res = res
+        .startAt(...queryValue)
+        .endAt(...queryValue)
+    }
+
+    const total = await this.count(res)
+
+    res = await res
+      .limit(perPage*pageNumber)
+      .get();
+
+    let i = 0;
+    res.forEach(doc => {
+      if (i >= (pageNumber - 1) * perPage) {
+        const snapshot = doc.data();
+        snapshot._id = doc.id;
+        data.push(snapshot);
+      }
+      i += 1;
+    });
+    return {data, total}
   }
 
   async getOne(_id) {
@@ -105,11 +144,22 @@ const uploadFile = async ({
     // userRef: firebase.auth().currentUser.uid,
     createdAt: new Date().toISOString(),
   };
-
   return model.product.save(data)
 };
 
+
+const paginate = async (query, page, perPage) => {
+  return await model.product.paginate(query, page, perPage)
+}
+
+const showAll = async () => {
+  return await model.product.getAll()
+}
+
+
 export default {
   signUp,
-  uploadFile
+  uploadFile,
+  paginate,
+  showAll
 }
