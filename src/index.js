@@ -154,6 +154,15 @@ route("/signUp", () => {
 route("/signIn", () => {
   root.innerHTML = "<signIn></signIn>";
   riot.mount("signIn", {});
+  
+  document.getElementById("signIn-form").addEventListener("submit", async e => {
+    e.preventDefault();
+    const email = document.querySelector('[name="email"]').value;
+    const password = document.querySelector('[name = "password"]').value;
+    await service.signIn(email, password)
+    window.location.href = "/";
+    
+  })
 });
 
 route.start(true);
