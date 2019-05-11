@@ -4,10 +4,12 @@ import riot from 'riot';
 import 'riot-hot-reload';
 import "./components/app.tag";
 import "./components/signUp.tag";
+import "./components/signIn.tag";
 import "./components/footerComponent.tag";
 import "./components/navbar.tag";
 import "./components/upload.tag";
 import "./components/detail.tag";
+
 
 
 import controller from "./controller";
@@ -144,10 +146,14 @@ route("/upload", () => {
 })
   
 route("/signUp", () => {
-  console.log("Tin the l` nao duoc!!!");
   root.innerHTML = "<signUp></signUp>";
   riot.mount("signUp", {});
-  controller.signUp(document.getElementById("sign-up"));
+  
+});
+
+route("/signIn", () => {
+  root.innerHTML = "<signIn></signIn>";
+  riot.mount("signIn", {});
 });
 
 route.start(true);

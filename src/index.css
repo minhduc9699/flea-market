@@ -173,7 +173,7 @@ upload.upload {
   color: #EB5757;
 }
 
-input,
+input:not([type="checkbox"]),
 select,
 textarea {
   height: 54px;
@@ -309,6 +309,37 @@ p .error-message {
   font-weight: 500;
   line-height: 130%;
   color:#EB5757;
+}
+
+.signUp-info, .signIn-info {
+  padding: 40px 60px;
+  margin-bottom: 0px;
+}
+
+.signUp-info .submit, .signIn-info .submit {
+  padding: 0;
+}
+
+.signUp-info, .signIn-info {
+  margin-bottom: 140px;
+}
+
+.signIn-option {
+  padding-bottom: 24px;
+}
+
+.signIn-option span {
+  padding-left: 7px;
+  color: #828282;
+  line-height: 130%;
+}
+
+.signIn-option .forgot {
+  color: #35CE97;
+}
+
+.signIn-option .forgot:hover {
+  cursor: pointer;
 }
 
 .clock-box {
