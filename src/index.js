@@ -7,6 +7,8 @@ import "./components/signUp.tag";
 import "./components/footerComponent.tag";
 import "./components/navbar.tag";
 import "./components/upload.tag";
+import "./components/detail.tag";
+
 
 import controller from "./controller";
 import route from "riot-route";
@@ -51,6 +53,11 @@ route("/", () => {
   getProducts(page)
 
 });
+
+route("/detail/", (_id) => {
+  root.innerHTML = "<detail></detail>";
+  riot.mount("detail");
+})
 
 route("/upload", () => {
   root.innerHTML = "<upload></upload>";
