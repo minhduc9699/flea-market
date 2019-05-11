@@ -105,9 +105,12 @@ route("/", () => {
   };
 });
 
-route("/detail/", (_id) => {
+route("/detail/*", async (_id) => {
   root.innerHTML = "<detail></detail>";
-  riot.mount("detail");
+  const app = riot.mount("detail", {});
+  const that = app[0];
+  that.opts.product = await service.getById(_id);
+  
 })
 
 route("/upload", () => {

@@ -156,10 +156,15 @@ const showAll = async () => {
   return await model.product.getAll()
 }
 
+const getById = async (_id) => {
+  return await model.product.getOne(_id)
+}
+
 
 export default {
   signUp,
   uploadFile,
   paginate,
-  showAll
+  showAll,
+  getById
 }
