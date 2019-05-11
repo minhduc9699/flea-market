@@ -74,6 +74,12 @@ nav.navbar {
   color: var(--dark-gray);
 }
 
+.user-display-name {
+  display: block;
+  margin-left: 16px;
+  color: var(--dark-gray);
+}
+
 .middle-menu .nav-item a {
     margin: 0 8px;
     padding: 8px;
@@ -621,4 +627,27 @@ p .error-message {
   color: #BDBDBD;
   font-size: 20px;
   text-transform: capitalize;
+}
+
+.please-sign-in {
+  padding: 90px 0;
+}
+
+.please-sign-in h1 {
+  font-size: 32px;
+  color: #333333;
+  margin: 0 0 45px;
+}
+
+.please-sign-in .button {
+  margin-bottom: 16px;
+  max-width: 65%;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+
+.please-sign-in .button.sign-up {
+  margin: 0;
+  background: #ffffff;
+  color: #35CE97;
 }

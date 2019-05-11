@@ -9,8 +9,7 @@ import "./components/footerComponent.tag";
 import "./components/navbar.tag";
 import "./components/upload.tag";
 import "./components/detail.tag";
-
-
+import "./components/pleaseSignIn.tag";
 
 import controller from "./controller";
 import route from "riot-route";
@@ -42,9 +41,17 @@ function setQueries(queries) {
 // riot.mount("*");
 route.base("#");
 riot.mount("*", {
-  view: ''
+  view: '',
+  userDisplayName: ''
 });
 const navbar = riot.mount("navbar", {});
+
+service.checkAuth().then(user => {
+  if (user && user.displayName) {
+    navbar[0].opts.userDisplayName = user.displayName;
+    navbar[0].update();
+  }
+});
 
 route("/detail/*", async (_id) => {
   navbar[0].opts.view = "homepage";
@@ -55,96 +62,118 @@ route("/detail/*", async (_id) => {
   const that = app[0];
   that.opts.product = await service.getById(_id);
   that.update();
-  console.log(that.opts.product)
 });
 
-route("/upload", () => {
+route("/upload", async () => {
   navbar[0].opts.view = "sellit";
   navbar[0].update();
 
-  root.innerHTML = "<upload></upload>";
-  riot.mount("upload");
-  const schema = yup.object().shape({
-    title: yup.string().required("title is required").max(100),
-    category: yup.string().required("category is required"),
-    emotion: yup.string().required(),
-    files: yup.array().required("there must be at least one image"),
-    price: yup.number().required().min(0).typeError("price must be a number"),
-    description: yup.string(),
-    reason: yup.string()
-  });
+  const user = await service.checkAuth();
+  
+  if (!user) {
+    root.innerHTML = "<pleaseSignIn></pleaseSignIn>";
+    riot.mount("pleaseSignIn");
+  } else {
+    root.innerHTML = "<upload></upload>";
+    riot.mount("upload");
 
-  document.getElementById('product-form').addEventListener('submit',async (e) => {
-    e.preventDefault();
-    const files = [];
-    document.querySelectorAll('[name*="files"]').forEach((elem) => {
-      if (elem.files[0]) {
-        files.push(elem.files[0]);
-      }
+    const schema = yup.object().shape({
+      title: yup.string().required("title is required").max(100),
+      category: yup.string().required("category is required"),
+      emotion: yup.string().required(),
+      files: yup.array().required("there must be at least one image"),
+      price: yup.number().required().min(0).typeError("price must be a number"),
+      description: yup.string(),
+      reason: yup.string()
     });
-    
-    const formData = {
-      category: document.querySelector('[name="category"]').value,
-      emotion: document.querySelector('input[name=emotion]:checked').value,
-      title: document.querySelector('[name="title"]').value,
-      files,
-      price: document.querySelector('[name="price"]').value,
-      description: document.querySelector('[name="description"]').value,
-      reason: document.querySelector('[name="reason"]').value
-    };
-
-    let errorMessages = [];
-    try {
-     const res =  await schema.validate(formData, { abortEarly: false });
-    } catch (error) {
-      error.inner.map(err => {
-        errorMessages.push({
-          path: err.path,
-          message: err.message
-        });
-      });
-    }
-
-    if(errorMessages.length > 0) {
-      const errorPaths = errorMessages.map(error => error.path);
-      document.querySelectorAll('[id*=-err]').forEach(elem => {
-        const elemPath = elem.id.replace('-err', '');
-        const pathIndex = errorPaths.indexOf(elemPath);
-        if (pathIndex > -1) {
-          elem.innerText = errorMessages[pathIndex].message;
-        } else elem.innerText = '';
-      });
-    } else {
-      service.uploadFile(formData).then(r => window.location.reload());
-    }
-
-  });
-
-  document.querySelectorAll('[name*="files"]').forEach((elem, index) => {
-    elem.addEventListener('change', event => {
-      const file = event.target.files[0];
-      const preview = document.querySelector(`.file-select:nth-child(${index + 1}) .preview`);
-      
-      if (file) {
-        const reader = new FileReader();
-
-        reader.onloadend = () => {
-          preview.src = reader.result;
-          preview.style.display = 'block';
+  
+    document.getElementById('product-form').addEventListener('submit',async (e) => {
+      e.preventDefault();
+      const files = [];
+      document.querySelectorAll('[name*="files"]').forEach((elem) => {
+        if (elem.files[0]) {
+          files.push(elem.files[0]);
         }
-
-        reader.readAsDataURL(file);
-      } else {
-        preview.src = "";
-        preview.style.display = 'none';
+      });
+      
+      const formData = {
+        category: document.querySelector('[name="category"]').value,
+        emotion: document.querySelector('input[name=emotion]:checked').value,
+        title: document.querySelector('[name="title"]').value,
+        files,
+        price: document.querySelector('[name="price"]').value,
+        description: document.querySelector('[name="description"]').value,
+        reason: document.querySelector('[name="reason"]').value
+      };
+  
+      let errorMessages = [];
+      try {
+       const res =  await schema.validate(formData, { abortEarly: false });
+      } catch (error) {
+        error.inner.map(err => {
+          errorMessages.push({
+            path: err.path,
+            message: err.message
+          });
+        });
       }
+  
+      if(errorMessages.length > 0) {
+        const errorPaths = errorMessages.map(error => error.path);
+        document.querySelectorAll('[id*=-err]').forEach(elem => {
+          const elemPath = elem.id.replace('-err', '');
+          const pathIndex = errorPaths.indexOf(elemPath);
+          if (pathIndex > -1) {
+            elem.innerText = errorMessages[pathIndex].message;
+          } else elem.innerText = '';
+        });
+      } else {
+        service.uploadFile(formData).then(r => window.location.reload());
+      }
+  
     });
-  });
+  
+    document.querySelectorAll('[name*="files"]').forEach((elem, index) => {
+      elem.addEventListener('change', event => {
+        const file = event.target.files[0];
+        const preview = document.querySelector(`.file-select:nth-child(${index + 1}) .preview`);
+        
+        if (file) {
+          const reader = new FileReader();
+  
+          reader.onloadend = () => {
+            preview.src = reader.result;
+            preview.style.display = 'block';
+          }
+  
+          reader.readAsDataURL(file);
+        } else {
+          preview.src = "";
+          preview.style.display = 'none';
+        }
+      });
+    });
+  }
 })
   
 route("/signUp", () => {
   root.innerHTML = "<signUp></signUp>";
   riot.mount("signUp", {});
+  document.getElementById("signUp-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const fullName = document.querySelector('[name="fullName"]').value;
+    const email = document.querySelector('[name="email"]').value;
+    const password = document.querySelector('[name="password"]').value;
+    const confirmPassword = document.querySelector('[name="confirmPassword"]').value;
+
+    if (password != confirmPassword) {
+      document.getElementById("confirmPassword-err").innerText = "password miss match";
+    } else {
+      service.signUp(fullName, email, password)
+      .then(r => window.location.href = "/")
+      .catch(err => console.log(err));
+    }
+  })
   
 });
 
@@ -158,7 +187,6 @@ route("/signIn", () => {
     const password = document.querySelector('[name = "password"]').value;
     await service.signIn(email, password)
     window.location.href = "/";
-    
   })
 });
 

@@ -24,19 +24,19 @@
       <li class="nav-item">
         <img id="search" src="/assets/search.png" />
       </li>
-      <li class="nav-item">
+      <li if="{!opts.userDisplayName}" class="nav-item">
         <a href="/#signUp" id="sign-up">
           Sign up
         </a>
       </li>
-      <li class="nav-item">
+      <li if="{!opts.userDisplayName}" class="nav-item">
         <a href="/#signIn" id="sign-in">
           Sign in
         </a>
       </li>
+      <li if="{opts.userDisplayName}" class="nav-item">
+        <span class="user-display-name">Hi, {opts.userDisplayName}</span>
+      </li>
     </ul>
   </nav>
-
-  <script>
-  </script>
 </navbar>
