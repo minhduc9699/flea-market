@@ -509,3 +509,33 @@ p .error-message {
   font-weight: 500;
   margin: 0 16px;
 }
+
+
+.detail-images {
+  padding-top: 70px;
+  padding-left: 140px;
+}
+
+.detail-images img {
+  max-width: 100%;
+}
+
+.big-img {
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-bottom: 12px;
+}
+
+
+.small-img {
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.small-img img {
+  padding: 12px;
+}
+
+
+
+  
