@@ -64,54 +64,32 @@
 
   </div>
   <script>
-    const getProducts = async (page) => {
-      const { data, total } = await this.opts.showAllProduct({}, page, this.opts.perPage);
-      this.opts.products = data;
-      this.opts.total = total;
-      this.opts.currentPage = page > 0 ? page : 1;
-      this.opts.totalPage = Math.ceil(total / this.opts.perPage);
-      this.update();
-    }
+    // function goToPage(state) {
+    //   let nextPage = Number(opts.currentPage) - 1;
+    //   if(state === 'next') nextPage = Number(opts.currentPage) + 1;
+    //   window.history.replaceState("", "", window.location.href.replace(`page=${opts.currentPage}`, `page=${nextPage}`));
+    //   getProducts(nextPage || 1);
+    // }
 
-    function goToPage(state) {
-      let nextPage = Number(opts.currentPage) - 1;
-      if(state === 'next') nextPage = Number(opts.currentPage) + 1;
-      window.history.replaceState("", "", window.location.href.replace(`page=${opts.currentPage}`, `page=${nextPage}`));
-
-      getProducts(nextPage || 1);
-    }
-
-    function filter(state) {
-      const query = new URLSearchParams(window.location.search);
+    // function filter(state) {
+    //   const query = new URLSearchParams(window.location.search);
       
-      if (opts[state]) {
-        window.history.replaceState(
-          "",
-          "",
-          window.location.href.replace(
-            `${state}=${opts[state]}`,
-            `${state}=${value}`));
-      } else {
-        window.history.replaceState(
-          "",
-          "",
-          window.location.href.replace(
-            `${state}=${opts[state]}`,
-            `${state}=${value}`));
-      }
-        
-    }
+    //   if (opts[state]) {
+    //     window.history.replaceState(
+    //       "",
+    //       "",
+    //       window.location.href.replace(
+    //         `${state}=${opts[state]}`,
+    //         `${state}=${value}`));
+    //   } else {
+    //     window.history.replaceState(
+    //       "",
+    //       "",
+    //       window.location.href.replace(
+    //         `${state}=${opts[state]}`,
+    //         `${state}=${value}`));
+    //   }
+    // }
     
-    this.on('mount', () => {
-      const query = new URLSearchParams(window.location.search);
-      const page = query.get('page') || 1;
-      this.opts.currentCategory = query.get('category') || '';
-      this.opts.currentEmotion = query.get('emotion') || '';
-      this.opts.perPage = query.get('perPage') || 9;
-      this.opts.goToPage = goToPage;
-      this.opts.filter = filter;
-      
-      getProducts(page);
-    });
   </script>
 </app>

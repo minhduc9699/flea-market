@@ -20,14 +20,36 @@ const root = document.getElementById("root");
 // riot.mount("*");
 route.base("#");
 riot.mount("*", {});
-route("/", async () => {
+route("/", () => {
   root.innerHTML = "<app></app>";
-  const query = route.query();
-  riot.mount("app", {
+  const query = new URLSearchParams(window.location.search);
+  query.set("category", 'All Products');
+  query.set("emotion", 'All Emotions');
+  const currentCategory = query.get("category");
+  const currentEmotion = query.get("emotion");
+  // window.location.search = `?${query.toString()}`;
+  const app = riot.mount("app", {
+    currentCategory: currentCategory,
+    currentEmotion: currentEmotion,
     showAllProduct: service.paginate,
     categories : ["All Products", "Accessories", "Boys Stuff", "Bridal", "Girls Stuff", "Jewelry", "Weird Stuff", "Random Stuff"],
     emotions : ["All Emotions", "Heartbroken", "Shocked", "Angry", "On The Rebound", "Better Than Ever"],
   });
+  const that = app[0];
+
+  const getProducts = async (page) => {
+    const { data, total } = await that.opts.showAllProduct({}, page, that.opts.perPage);
+    that.opts.products = data;
+    that.opts.total = total;
+    that.opts.currentPage = page > 0 ? page : 1;
+    that.opts.totalPage = Math.ceil(total / that.opts.perPage);
+    that.update();
+  }
+
+  const page = query.get('page') || 1;
+  that.opts.perPage = query.get('perPage') || 9;
+  getProducts(page)
+
 });
 
 route("/upload", () => {
