@@ -19,17 +19,18 @@
     <div class="filter col-3">
       <p>Filter</p>
       <ul>
-        <li each="{category in opts.categories}" class="{opts.currentCategory == category ? 'active' : '' }">
+        <li each="{category in opts.categories}"
+        class="{opts.currentCategory == category ? 'active' : '' }">
           <span></span>
-          <a onclick="() => opts.filter(category)" href="#">{category}</a>
+          <a role="button" onclick="{() => opts.setFilter('Category', category)}">{category}</a>
         </li>
         
       </ul>
       <ul>
-        <li each="{emo in opts.emotions}" class="
-        {opts.currentEmotion == emo ? 'active' : ''}">
+        <li each="{emo in opts.emotions}"
+        class="{opts.currentEmotion == emo ? 'active' : ''}">
           <span></span>
-          <a href="#">{emo}</a>
+          <a role="button" onclick="{() => opts.setFilter('Emotion', emo)}">{emo}</a>
         </li>
       </ul>
     </div>
@@ -45,7 +46,7 @@
           </div>
           <h3 class="product-name">{product.title}</h3>
           <span class="product-price">{Number(product.price).toLocaleString('vi')}đ</span>
-          <span class="product-owner">thuylinh138</span>
+          <span class="product-owner">hihihi</span>
         </div>
       </div>
     </div>
@@ -54,42 +55,13 @@
 
   </div>
   <div class="product-paginate grid-right-middle no-margin">
-    <button onclick="{() => opts.goToPage('previous')}" class="previous {opts.currentPage <= 1 ? 'disabled' : ''}">
+    <button onclick="{() => opts.goToPage(opts.currentPage - 1)}" class="previous {opts.currentPage <= 1 ? 'disabled' : ''}">
       <img src="/assets/previous.png" alt="">
     </button>
     <span class="page-number">{opts.currentPage}/{opts.totalPage}</span>
-    <button onclick="{() => opts.goToPage('next')}" class="next {opts.currentPage >= opts.totalPage ? 'disabled' : ''}">
+    <button onclick="{() => opts.goToPage(opts.currentPage + 1)}" class="next {opts.currentPage >= opts.totalPage ? 'disabled' : ''}">
       <img src="/assets/next.png" alt="">
     </button>
 
   </div>
-  <script>
-    // function goToPage(state) {
-    //   let nextPage = Number(opts.currentPage) - 1;
-    //   if(state === 'next') nextPage = Number(opts.currentPage) + 1;
-    //   window.history.replaceState("", "", window.location.href.replace(`page=${opts.currentPage}`, `page=${nextPage}`));
-    //   getProducts(nextPage || 1);
-    // }
-
-    // function filter(state) {
-    //   const query = new URLSearchParams(window.location.search);
-      
-    //   if (opts[state]) {
-    //     window.history.replaceState(
-    //       "",
-    //       "",
-    //       window.location.href.replace(
-    //         `${state}=${opts[state]}`,
-    //         `${state}=${value}`));
-    //   } else {
-    //     window.history.replaceState(
-    //       "",
-    //       "",
-    //       window.location.href.replace(
-    //         `${state}=${opts[state]}`,
-    //         `${state}=${value}`));
-    //   }
-    // }
-    
-  </script>
 </app>

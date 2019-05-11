@@ -18,6 +18,9 @@ h1 {
   color: var(--dark-light-gray);
 }
 
+a[role=button]:hover {
+  cursor: pointer;
+}
 
 .text-grey {
   color: var(--light-grey)

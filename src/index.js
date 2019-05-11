@@ -17,39 +17,86 @@ import * as yup from 'yup';
 
 const root = document.getElementById("root");
 
+function setQueries(queries) {
+  const url = window.location;
+  const currentQueries = new URLSearchParams(url.search);
+
+  for(let key in queries) {
+    let value = queries[key];
+    if(value === 1) currentQueries.delete(key)
+    else if (value) currentQueries.set(key, value)
+    else currentQueries.delete(key);
+  }
+  
+  window.history.replaceState(
+    "",
+    "",
+    `${url.origin}${url.pathname}?${currentQueries.toString()}`
+  );
+}
+
 // riot.mount("*");
 route.base("#");
 riot.mount("*", {});
 route("/", () => {
   root.innerHTML = "<app></app>";
   const query = new URLSearchParams(window.location.search);
-  query.set("category", 'All Products');
-  query.set("emotion", 'All Emotions');
-  const currentCategory = query.get("category");
-  const currentEmotion = query.get("emotion");
-  // window.location.search = `?${query.toString()}`;
+  
+  const currentCategory = query.get("category") || 'All Products';
+  const currentEmotion = query.get("emotion") || 'All Emotions';
+  
   const app = riot.mount("app", {
     currentCategory: currentCategory,
     currentEmotion: currentEmotion,
     showAllProduct: service.paginate,
+    perPage: query.get('perPage') || 9,
     categories : ["All Products", "Accessories", "Boys Stuff", "Bridal", "Girls Stuff", "Jewelry", "Weird Stuff", "Random Stuff"],
-    emotions : ["All Emotions", "Heartbroken", "Shocked", "Angry", "On The Rebound", "Better Than Ever"],
+    emotions : ["All Emotions", "Heartbroken", "Shocked", "Angry", "On The Bound", "Better Than Ever"],
   });
+
   const that = app[0];
 
   const getProducts = async (page) => {
-    const { data, total } = await that.opts.showAllProduct({}, page, that.opts.perPage);
+    const { currentCategory, currentEmotion } = that.opts;
+    const queries = {};
+
+    if (currentCategory !== "All Products") {
+      queries.category = currentCategory
+    }
+
+    if (currentEmotion !== "All Emotions") {
+      queries.emotion = currentEmotion
+    }
+
+    setQueries({
+      page: page,
+      ...queries
+    });
+
+    const { data, total } = await that.opts.showAllProduct(
+      queries,
+      page,
+      that.opts.perPage
+    );
     that.opts.products = data;
     that.opts.total = total;
-    that.opts.currentPage = page > 0 ? page : 1;
-    that.opts.totalPage = Math.ceil(total / that.opts.perPage);
+    that.opts.currentPage = page;
+    that.opts.totalPage = Math.ceil(total / that.opts.perPage) > 0 ? Math.ceil(total / that.opts.perPage) : 1;
     that.update();
   }
 
-  const page = query.get('page') || 1;
-  that.opts.perPage = query.get('perPage') || 9;
-  getProducts(page)
+  const page = query.get('page') > 0 ? Number(query.get('page')) : 1;
+  getProducts(page);
 
+  that.opts.goToPage = (newPage) => {
+    that.opts.currentPage = newPage;
+    getProducts(newPage);
+  };
+
+  that.opts.setFilter = (filter, value) => {
+    that.opts[`current${filter}`] = value;
+    getProducts(1);
+  };
 });
 
 route("/upload", () => {
