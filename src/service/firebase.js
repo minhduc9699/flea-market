@@ -100,22 +100,27 @@ const model = {
   product: new FirebaseModel("products"),
 }
 
+const signIn = async (email, password) => {
+  return await firebase.auth().signInWithEmailAndPassword(
+    email,
+    password
+  );
+}
 
-const signUp = async (lastName, firstName, phoneNumber, email, password) => {
+const signUp = async (fullName, email, password) => {
   const r = await firebase
     .auth()
     .createUserWithEmailAndPassword(email, password);
   firebase.auth().currentUser.sendEmailVerification();
   firebase.auth().currentUser.updateProfile({
-    displayName: `${lastName} ${firstName}`,
-    phoneNumber
+    displayName: fullName,
   });
-  model.userProfile.save({
+  const user = await model.userProfile.save({
+    _id: r.user.uid,
     email,
-    displayName: `${lastName} ${firstName}`,
-    phoneNumber
+    displayName: fullName,
   });
-  localStorage.user = JSON.stringify(r.user);
+  localStorage.user = JSON.stringify(user);
   return r;
 };
 
@@ -163,6 +168,7 @@ const getById = async (_id) => {
 
 export default {
   signUp,
+  signIn,
   uploadFile,
   paginate,
   showAll,
