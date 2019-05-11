@@ -25,12 +25,12 @@
         <img id="search" src="/assets/search.png" />
       </li>
       <li class="nav-item">
-        <a href="#" id="sign-up">
+        <a href="/#signUp" id="sign-up">
           Sign up
         </a>
       </li>
       <li class="nav-item">
-        <a href="#" id="sign-in">
+        <a href="/#signIn" id="sign-in">
           Sign in
         </a>
       </li>
