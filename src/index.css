@@ -18,8 +18,14 @@ h1 {
   color: var(--dark-light-gray);
 }
 
-a[role=button]:hover {
+a[role=button]:hover,
+button:hover {
   cursor: pointer;
+}
+
+button:focus,
+button:active {
+  outline: 0 none;
 }
 
 .text-grey {
@@ -513,10 +519,14 @@ p .error-message {
   margin: 0 16px;
 }
 
+.product-detail {
+  margin: 40px 0;
+  padding: 0 80px;
+  display: block;
+}
 
 .detail-images {
-  padding-top: 70px;
-  padding-left: 140px;
+  padding-right: 55px;
 }
 
 .detail-images img {
@@ -524,18 +534,60 @@ p .error-message {
 }
 
 .big-img {
-  overflow: hidden;
-  box-sizing: border-box;
-  padding-bottom: 12px;
+  padding: 24px 60px;
 }
 
-
-.small-img {
-  overflow: hidden;
-  max-width: 100%;
+.detail-info {
+  padding-left: 55px;
+  font-weight: 500;
+  font-size: 16px;
 }
 
-.small-img img {
-  padding: 12px;
+.detail-info h1 {
+  margin: 8px 0;
+  font-size: 32px;
+  color: #333333;
 }
 
+.detail-category,
+.detail-author,
+.detail-date {
+  color: #BDBDBD;
+}
+
+.detail-price {
+  font-size: 48px;
+  color: #35CE97;
+  margin: 40px 0 16px;
+  display: block;
+}
+
+.button.get-contact {
+  max-width: 15rem;
+}
+
+.detail-description {
+  margin-top: 40px;
+  border-top: 1px solid #E0E0E0;
+}
+
+.detail-description,
+.detail-reason {
+  padding-top: 16px;
+}
+
+.detail-description p,
+.detail-reason p {
+  margin: 0;
+  color: #4F4F4F;
+  font-weight: 500;
+}
+
+.detail-description h3,
+.detail-reason h3 {
+  margin: 0;
+  margin-bottom: 8px;
+  color: #BDBDBD;
+  font-size: 20px;
+  text-transform: capitalize;
+}

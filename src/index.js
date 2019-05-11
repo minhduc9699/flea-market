@@ -39,81 +39,27 @@ function setQueries(queries) {
 
 // riot.mount("*");
 route.base("#");
-riot.mount("*", {});
-route("/", () => {
-  root.innerHTML = "<app></app>";
-  const query = new URLSearchParams(window.location.search);
-  
-  const currentCategory = query.get("category") || 'All Products';
-  const currentEmotion = query.get("emotion") || 'All Emotions';
-  
-  const app = riot.mount("app", {
-    currentCategory: currentCategory,
-    currentEmotion: currentEmotion,
-    showAllProduct: service.paginate,
-    perPage: query.get('perPage') || 9,
-    categories : ["All Products", "Accessories", "Boys Stuff", "Bridal", "Girls Stuff", "Jewelry", "Weird Stuff", "Random Stuff"],
-    emotions : ["All Emotions", "Heartbroken", "Shocked", "Angry", "On The Bound", "Better Than Ever"],
-  });
-
-  const that = app[0];
-
-  const getProducts = async (page) => {
-    const { currentCategory, currentEmotion } = that.opts;
-    const queries = {
-      category: currentCategory,
-      emotion: currentEmotion
-    };
-
-    setQueries({
-      page: page,
-      ...queries
-    });
-    
-    if (currentCategory === "All Products") {
-      delete queries.category;
-    }
-
-    if (currentEmotion === "All Emotions") {
-      delete queries.emotion;
-    }
-
-    const { data, total } = await that.opts.showAllProduct(
-      queries,
-      page,
-      that.opts.perPage
-    );
-
-    that.opts.products = data;
-    that.opts.total = total;
-    that.opts.currentPage = page;
-    that.opts.totalPage = Math.ceil(total / that.opts.perPage) > 0 ? Math.ceil(total / that.opts.perPage) : 1;
-    that.update();
-  }
-
-  const page = query.get('page') > 0 ? Number(query.get('page')) : 1;
-  getProducts(page);
-
-  that.opts.goToPage = (newPage) => {
-    that.opts.currentPage = newPage;
-    getProducts(newPage);
-  };
-
-  that.opts.setFilter = (filter, value) => {
-    that.opts[`current${filter}`] = value;
-    getProducts(1);
-  };
+riot.mount("*", {
+  view: ''
 });
+const navbar = riot.mount("navbar", {});
 
 route("/detail/*", async (_id) => {
+  navbar[0].opts.view = "homepage";
+  navbar[0].update();
+
   root.innerHTML = "<detail></detail>";
   const app = riot.mount("detail", {});
   const that = app[0];
   that.opts.product = await service.getById(_id);
-  
-})
+  that.update();
+  console.log(that.opts.product)
+});
 
 route("/upload", () => {
+  navbar[0].opts.view = "sellit";
+  navbar[0].update();
+
   root.innerHTML = "<upload></upload>";
   riot.mount("upload");
   const schema = yup.object().shape({
@@ -199,6 +145,74 @@ route("/signUp", () => {
   root.innerHTML = "<signUp></signUp>";
   riot.mount("signUp", {});
   controller.signUp(document.getElementById("sign-up"));
+});
+
+route("/", () => {
+  navbar[0].opts.view = "homepage";
+  navbar[0].update();
+
+  root.innerHTML = "<app></app>";
+  const query = new URLSearchParams(window.location.search);
+  
+  const currentCategory = query.get("category") || 'All Products';
+  const currentEmotion = query.get("emotion") || 'All Emotions';
+  
+  const app = riot.mount("app", {
+    currentCategory: currentCategory,
+    currentEmotion: currentEmotion,
+    showAllProduct: service.paginate,
+    perPage: query.get('perPage') || 9,
+    categories : ["All Products", "Accessories", "Boys Stuff", "Bridal", "Girls Stuff", "Jewelry", "Weird Stuff", "Random Stuff"],
+    emotions : ["All Emotions", "Heartbroken", "Shocked", "Angry", "On The Bound", "Better Than Ever"],
+  });
+
+  const that = app[0];
+
+  const getProducts = async (page) => {
+    const { currentCategory, currentEmotion } = that.opts;
+    const queries = {
+      category: currentCategory,
+      emotion: currentEmotion
+    };
+
+    setQueries({
+      page: page,
+      ...queries
+    });
+    
+    if (currentCategory === "All Products") {
+      delete queries.category;
+    }
+
+    if (currentEmotion === "All Emotions") {
+      delete queries.emotion;
+    }
+
+    const { data, total } = await that.opts.showAllProduct(
+      queries,
+      page,
+      that.opts.perPage
+    );
+
+    that.opts.products = data;
+    that.opts.total = total;
+    that.opts.currentPage = page;
+    that.opts.totalPage = Math.ceil(total / that.opts.perPage) > 0 ? Math.ceil(total / that.opts.perPage) : 1;
+    that.update();
+  }
+  
+  const page = query.get('page') > 0 ? Number(query.get('page')) : 1;
+  getProducts(page);
+
+  that.opts.goToPage = (newPage) => {
+    that.opts.currentPage = newPage;
+    getProducts(newPage);
+  };
+
+  that.opts.setFilter = (filter, value) => {
+    that.opts[`current${filter}`] = value;
+    getProducts(1);
+  };
 });
 
 route.start(true);

@@ -1,21 +1,21 @@
 <navbar>
   <nav class="navbar grid fullwidth">
-    <div class="nav-brand grid-middle-left col-4">
+    <a href="/#" class="nav-brand grid-middle-left col-4">
       <img src="/assets/logo.png" />
-    </div>
+    </a>
     <ul class="nav-menu middle-menu grid-middle-center col-4">
-      <li class="nav-item active">
-        <a href="#">
+      <li class="nav-item {opts.view == 'homepage' ? 'active' : ''}">
+        <a href="/#">
           Buy it
         </a>
       </li>
-      <li class="nav-item">
-        <a href="#">
+      <li class="nav-item {opts.view == 'sellit' ? 'active' : ''}">
+        <a href="/#upload">
           Sell it
         </a>
       </li>
-      <li class="nav-item">
-        <a href="#">
+      <li class="nav-item {opts.view == 'tellit' ? 'active' : ''}">
+        <a href="/#upload">
           Tell it
         </a>
       </li>

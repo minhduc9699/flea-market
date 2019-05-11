@@ -39,7 +39,7 @@
         <p><span></span>All Products({opts.total})</p>
       </div>
       <div class="grid">
-        <a href="/detail/{product._id}" class="col-4 product-item" each="{product in opts.products}">
+        <a href="/#/detail/{product._id}" class="col-4 product-item" each="{product in opts.products}">
           <div class="product-image">
             <img class="product-emotion" src="/assets/heartbroken.png" alt="">
             <img src={product.imgUrls[0]} >
