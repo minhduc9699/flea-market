@@ -39,7 +39,7 @@
         <p><span></span>All Products({opts.total})</p>
       </div>
       <div class="grid">
-        <div class="col-4 product-item" each="{product in opts.products}">
+        <a href="/detail/{product._id}" class="col-4 product-item" each="{product in opts.products}">
           <div class="product-image">
             <img class="product-emotion" src="/assets/heartbroken.png" alt="">
             <img src={product.imgUrls[0]} >
@@ -47,7 +47,7 @@
           <h3 class="product-name">{product.title}</h3>
           <span class="product-price">{Number(product.price).toLocaleString('vi')}đ</span>
           <span class="product-owner">hihihi</span>
-        </div>
+        </a>
       </div>
     </div>
 

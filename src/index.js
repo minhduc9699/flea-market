@@ -60,26 +60,30 @@ route("/", () => {
 
   const getProducts = async (page) => {
     const { currentCategory, currentEmotion } = that.opts;
-    const queries = {};
-
-    if (currentCategory !== "All Products") {
-      queries.category = currentCategory
-    }
-
-    if (currentEmotion !== "All Emotions") {
-      queries.emotion = currentEmotion
-    }
+    const queries = {
+      category: currentCategory,
+      emotion: currentEmotion
+    };
 
     setQueries({
       page: page,
       ...queries
     });
+    
+    if (currentCategory === "All Products") {
+      delete queries.category;
+    }
+
+    if (currentEmotion === "All Emotions") {
+      delete queries.emotion;
+    }
 
     const { data, total } = await that.opts.showAllProduct(
       queries,
       page,
       that.opts.perPage
     );
+
     that.opts.products = data;
     that.opts.total = total;
     that.opts.currentPage = page;

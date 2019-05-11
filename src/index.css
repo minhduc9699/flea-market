@@ -419,6 +419,7 @@ p .error-message {
   margin-bottom: 40px;
   padding-left: 16px;
   padding-right: 16px;
+  text-decoration: none;
 }
 
 .product-item .product-image {
@@ -432,6 +433,8 @@ p .error-message {
 
 .product-item .product-image > img {
   max-width: 100%;
+  padding: 0 16px;
+  box-sizing: border-box;
   position: absolute;
   top: 50%;
   left: 50%;
