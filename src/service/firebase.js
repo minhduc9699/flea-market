@@ -95,9 +95,21 @@ class FirebaseModel {
 }
 
 
+
+
 const model = {
   userProfile: new FirebaseModel("userProfiles"),
   product: new FirebaseModel("products"),
+}
+
+const checkAuth = () => {
+  return new Promise((resolve, reject) => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) resolve(true)
+      resolve(false)
+    })  
+  })
+
 }
 
 const signIn = async (email, password) => {
@@ -167,6 +179,7 @@ const getById = async (_id) => {
 
 
 export default {
+  checkAuth,
   signUp,
   signIn,
   uploadFile,

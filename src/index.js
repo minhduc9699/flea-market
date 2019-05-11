@@ -64,9 +64,15 @@ route("/detail/*", async (_id) => {
   
 })
 
-route("/upload", () => {
+route("/upload", async () => {
   root.innerHTML = "<upload></upload>";
   riot.mount("upload");
+
+  const user = await service.checkAuth();
+  if (!user) {
+    window.location.href = "/";
+  }
+
   const schema = yup.object().shape({
     title: yup.string().required("title is required").max(100),
     category: yup.string().required("category is required"),
@@ -148,6 +154,21 @@ route("/upload", () => {
 route("/signUp", () => {
   root.innerHTML = "<signUp></signUp>";
   riot.mount("signUp", {});
+  document.getElementById("signUp-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const fullName = document.querySelector('[name="fullName"]').value;
+    const email = document.querySelector('[name="email"]').value;
+    const password = document.querySelector('[name="password"]').value;
+    const confirmPassword = document.querySelector('[name="confirmPassword"]').value;
+
+    if (password != confirmPassword) {
+      document.getElementById("confirmPassword-err").innerText = "password miss match";
+    } else {
+      service.signUp(fullName, email, password)
+      .then(r => window.location.href = "/")
+      .catch(err => console.log(err));
+    }
+  })
   
 });
 
@@ -161,7 +182,6 @@ route("/signIn", () => {
     const password = document.querySelector('[name = "password"]').value;
     await service.signIn(email, password)
     window.location.href = "/";
-    
   })
 });
 

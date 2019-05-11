@@ -8,7 +8,7 @@
       <div class="box signUp-info">
         <div class="form-group">
           <p>Full Name</p>
-          <input type="fullname" name="fullname" id="fullname" placeholder="tên xịn">
+          <input type="text" name="fullName" id="fullName" placeholder="tên xịn">
           <p id="email-err" class="error-message"></p>
         </div>
         <div class="form-group required">
