@@ -19,7 +19,7 @@
       <span class="detail-category">{opts.product.category}</span>
       <h1>{opts.product.title}</h1>
       <p class="no-margin">
-        <span class="detail-author">By {opts.product.author} </span>
+        <span class="detail-author">By {opts.product.userRef.displayName} </span>
         <span class="detail-date">on {new Date(opts.product.createdAt).toLocaleDateString('en', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
       </p>
       <span class="detail-price">{Number(opts.product.price).toLocaleString('vi')}đ</span>

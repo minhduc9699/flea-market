@@ -46,7 +46,7 @@
           </div>
           <h3 class="product-name">{product.title}</h3>
           <span class="product-price">{Number(product.price).toLocaleString('vi')}đ</span>
-          <span class="product-owner">hihihi</span>
+          <span class="product-owner" if="{product.userRef}">{product.userRef.displayName}</span>
         </a>
       </div>
     </div>

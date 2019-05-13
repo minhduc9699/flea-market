@@ -203,8 +203,11 @@ route("/signIn", () => {
     e.preventDefault();
     const email = document.querySelector('[name="email"]').value;
     const password = document.querySelector('[name = "password"]').value;
-    await service.signIn(email, password)
-    window.location.href = "/";
+    service.signIn(email, password).then(r => {
+      window.location.href = "/";
+    }).catch(err => {
+      document.getElementById("password-err").innerText = err.message
+    })
   })
 });
 
@@ -259,6 +262,7 @@ route("/", () => {
     that.opts.total = total;
     that.opts.currentPage = page;
     that.opts.totalPage = Math.ceil(total / that.opts.perPage) > 0 ? Math.ceil(total / that.opts.perPage) : 1;
+    console.log(data)
     that.update();
   }
   
