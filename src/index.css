@@ -316,6 +316,15 @@ ul {
   color: #BDBDBD;
 }
 
+.footer ul li a {
+  display: block;
+  margin: 4px 0;
+}
+
+.footer ul li:first-child a{
+  color: #F2F2F2;
+}
+
 .media li {
   margin-left: 35px;
 }

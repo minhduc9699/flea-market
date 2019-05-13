@@ -40,7 +40,7 @@ class FirebaseModel {
     return r.docs.length;
   }
   
-  async paginate(query, pageNumber, perPage) {
+  async paginate(query, pageNumber, perPage, populate="") {
     const data = [];
     const queryValue = [];
     let res = this.collection;
@@ -71,6 +71,15 @@ class FirebaseModel {
       }
       i += 1;
     });
+    if (populate) {
+      for(let i=0; i < data.length; i++) {
+        if (data[i].userRef) {
+          const user = await data[i].userRef.get()
+          data[i].userRef = user.data();
+        }
+      }
+    }
+    
     return {data, total}
   }
 
@@ -85,23 +94,12 @@ class FirebaseModel {
   getOneAndPopulate(_id, populatePath) {
     return new Promise(async (resolve, reject) => {
       let data = await this.getOne(_id);
-      const ref = data[populatePath]
-      if (!ref || !ref._id || !ref.path) {
-        data[populatePath] = null;
-        resolve(data);
-      } else {
-        const populateData = await new FirebaseModel(ref.path).getOne(ref._id);
-        if (!populateData) {
-          data[populatePath] = null;
-          resolve(data);
-        } else {
-          data[populatePath] = populateData
-          resolve(data)
-        }
-        
+      if(data.userRef) {
+        const user = await data.userRef.get();
+        data.userRef = user.data();
       }
-    })
-    
+      resolve(data);
+      })
   }
 
   save(data) {
@@ -192,10 +190,7 @@ const uploadFile = async ({
     reason,
     imgUrls,
     searchString: getUnicodeText(`${title} ${emotion} ${category}`),
-    userRef: {
-      _id: firebase.auth().currentUser.uid,
-      path: "userProfiles"
-    },
+    userRef: db.doc("userProfiles/" + firebase.auth().currentUser.uid),
     createdAt: new Date().toISOString(),
   };
   return model.product.save(data)
@@ -203,7 +198,7 @@ const uploadFile = async ({
 
 
 const paginate = async (query, page, perPage) => {
-  return await model.product.paginate(query, page, perPage)
+  return await model.product.paginate(query, page, perPage, true)
 }
 
 const showAll = async () => {
