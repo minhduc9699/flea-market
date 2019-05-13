@@ -21,9 +21,6 @@
       </li>
     </ul>
     <ul class="nav-menu right-menu grid-middle-right col-4">
-      <li class="nav-item">
-        <img id="search" src="/assets/search.png" />
-      </li>
       <li if="{!opts.userDisplayName}" class="nav-item">
         <a href="/#signUp" id="sign-up">
           Sign up

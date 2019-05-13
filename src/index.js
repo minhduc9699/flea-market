@@ -272,7 +272,6 @@ route("/", () => {
     that.opts.total = total;
     that.opts.currentPage = page;
     that.opts.totalPage = Math.ceil(total / that.opts.perPage) > 0 ? Math.ceil(total / that.opts.perPage) : 1;
-    console.log(data)
     that.update();
   }
   
