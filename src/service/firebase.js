@@ -82,6 +82,28 @@ class FirebaseModel {
     return data
   }
 
+  getOneAndPopulate(_id, populatePath) {
+    return new Promise(async (resolve, reject) => {
+      let data = await this.getOne(_id);
+      const ref = data[populatePath]
+      if (!ref || !ref._id || !ref.path) {
+        data[populatePath] = null;
+        resolve(data);
+      } else {
+        const populateData = await new FirebaseModel(ref.path).getOne(ref._id);
+        if (!populateData) {
+          data[populatePath] = null;
+          resolve(data);
+        } else {
+          data[populatePath] = populateData
+          resolve(data)
+        }
+        
+      }
+    })
+    
+  }
+
   save(data) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -92,6 +114,18 @@ class FirebaseModel {
       }
     });
   }
+
+  saveWithId (_id, data) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        await this.collection.doc(_id).set(data);
+        resolve(data);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
 }
 
 
@@ -127,7 +161,7 @@ const signUp = async (fullName, email, password) => {
   firebase.auth().currentUser.updateProfile({
     displayName: fullName,
   });
-  const user = await model.userProfile.save({
+  const user = await model.userProfile.saveWithId(firebase.auth().currentUser.uid ,{
     _id: r.user.uid,
     email,
     displayName: fullName,
@@ -158,7 +192,10 @@ const uploadFile = async ({
     reason,
     imgUrls,
     searchString: getUnicodeText(`${title} ${emotion} ${category}`),
-    // userRef: firebase.auth().currentUser.uid,
+    userRef: {
+      _id: firebase.auth().currentUser.uid,
+      path: "userProfiles"
+    },
     createdAt: new Date().toISOString(),
   };
   return model.product.save(data)
@@ -174,7 +211,7 @@ const showAll = async () => {
 }
 
 const getById = async (_id) => {
-  return await model.product.getOne(_id)
+  return await model.product.getOneAndPopulate(_id, "userRef")
 }
 
 

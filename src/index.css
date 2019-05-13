@@ -600,7 +600,9 @@ p .error-message {
 }
 
 .button.get-contact {
-  max-width: 15rem;
+  width: auto;
+  text-transform: none;
+
 }
 
 .detail-description {

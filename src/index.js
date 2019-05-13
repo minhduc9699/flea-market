@@ -64,6 +64,12 @@ route("/detail/*", async (_id) => {
   const that = app[0];
   that.opts.product = await service.getById(_id);
   that.update();
+  document.querySelector(".get-contact").addEventListener("click", e => {
+    e.target.innerText = that.opts.product.userRef ? that.opts.product.userRef.email : "contact not found";
+    e.target.style.background =  "#FFFFFF";
+    e.target.style.color = "#4F4F4F";
+    
+  })
 });
 
 route("/upload", async () => {
@@ -79,14 +85,7 @@ route("/upload", async () => {
   } else {
     root.innerHTML = "<upload></upload>";
     riot.mount("upload");
-    const modalElement = document.querySelector(".mx-modal");
-    const modal = initModal(modalElement);
-    modal.open();
-    document.querySelector(".mx-modal .button").addEventListener("click", e => {
-      modal.close();
-      window.location.href = "/#";
-    })
-
+    
     const schema = yup.object().shape({
       title: yup.string().required("title is required").max(100),
       category: yup.string().required("category is required"),
