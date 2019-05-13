@@ -771,22 +771,24 @@
 }
 
 .mx-modal {
-	background-color: #FFFFFF;
 	position: fixed;
-	left: 50%;
-	right: 0;
-	top: -9999px;
+    top: -9999px;
+    left: 0;
 	z-index: 10;
-	transform: translate(-50%, -50%);
     opacity: 0;
-    padding: 1rem;
-    border-radius: 8px;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 
 .mx-modal.is-open {
 	visibility: visible;
     opacity: 1;
-    top: 50%;
+    top: 0;
 }
 
 .mx-modal-overlay {

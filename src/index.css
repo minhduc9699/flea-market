@@ -652,19 +652,20 @@ p .error-message {
   color: #35CE97;
 }
 
-.mx-modal {
-  z-index: 99999;
+.mx-modal-body {
+  background-color: #FFFFFF;
+  border-radius: 8px;
   padding: 40px 124px;
 }
 
-.mx-modal p:first-child {
+.mx-modal-body p:first-child {
   color: #4F4F4F;
   font-size: 2rem;
   line-height: 38px;
   margin-bottom: 4px;
 }
 
-.mx-modal p:nth-child(2) {
+.mx-modal-body p:nth-child(2) {
   color: #828282;
   font-size: 1.25rem;
   line-height: 24px;
@@ -672,7 +673,7 @@ p .error-message {
   margin-bottom: 24px;
 }
 
-.mx-modal .button {
+.mx-modal-body .button {
   width: 14rem;
 }
 

@@ -111,14 +111,17 @@
     </div>
   </form>
 
-  <div class="mx-modal">
-    <div class="grid-middle-center">
-      <img src="/assets/success.png" alt="">
-    </div>
-    <div class="text-center">
-      <p>Upload Successfully!</p>
-      <p>Feel any better?</p>
-      <button class="button">Back to homepage</button>
+  <div class="mx-modal grid-middle-center">
+    <div class="mx-modal-body">
+      <div class="grid-middle-center">
+        <img src="/assets/success.png" alt="">
+      </div>
+      <div class="text-center">
+        <p>Upload Successfully!</p>
+        <p>Feel any better?</p>
+        <button class="button">Back to homepage</button>
+      </div>
     </div>
   </div>
+  
 </upload>

@@ -79,7 +79,13 @@ route("/upload", async () => {
   } else {
     root.innerHTML = "<upload></upload>";
     riot.mount("upload");
-    
+    const modalElement = document.querySelector(".mx-modal");
+    const modal = initModal(modalElement);
+    modal.open();
+    document.querySelector(".mx-modal .button").addEventListener("click", e => {
+      modal.close();
+      window.location.href = "/#";
+    })
 
     const schema = yup.object().shape({
       title: yup.string().required("title is required").max(100),
