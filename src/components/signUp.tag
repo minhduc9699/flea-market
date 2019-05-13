@@ -9,23 +9,20 @@
         <div class="form-group">
           <p>Full Name</p>
           <input type="text" name="fullName" id="fullName" placeholder="tên xịn">
-          <p id="email-err" class="error-message"></p>
         </div>
         <div class="form-group required">
           <p>Email Address</p>
           <input required type="email" name="email" id="email" placeholder="email xịn @gmail.com">
-          <p id="email-err" class="error-message"></p>
         </div>
         <div class="form-group required">
           <p>Password</p>
           <input required type="password" name="password" id="password" placeholder="password xịn @gmail.com">
-          <p id="password-err" class="error-message"></p>
         </div>
         <div class="form-group required">
           <p>Confirm Password</p>
           <input required type="password" name="confirmPassword" id="confirmPassword" placeholder="password xịn @gmail.com">
-          <p id="confirmPassword-err" class="error-message"></p>
         </div>
+        <p id="sign-up-err" class="error-message"></p>
         <div class="text-center submit">
           <button id="submit-button" class="button">sign Up</button>
         </div>
