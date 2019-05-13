@@ -320,7 +320,7 @@ ul {
   margin-left: 35px;
 }
 
-p .error-message {
+p.error-message {
   font-weight: 500;
   line-height: 130%;
   color:#EB5757;

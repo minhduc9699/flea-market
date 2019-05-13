@@ -9,13 +9,12 @@
         <div class="form-group required">
           <p>Email Address</p>
           <input required type="email" name="email" id="email" placeholder="email xịn @gmail.com">
-          <p id="email-err" class="error-message"></p>
         </div>
         <div class="form-group required">
           <p>Password</p>
           <input required type="password" name="password" id="password" placeholder="password xịn @gmail.com">
-          <p id="password-err" class="error-message"></p>
         </div>
+        <p id="sign-in-err" class="error-message"></p>
         <div class="signIn-option grid-spaceBetween no-margin">
           <div class="grid-middle no-margin">
             <input type="checkbox" id="" checked>

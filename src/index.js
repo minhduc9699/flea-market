@@ -179,6 +179,8 @@ route("/signUp", () => {
   riot.mount("signUp", {});
   document.getElementById("signUp-form").addEventListener("submit", (e) => {
     e.preventDefault();
+    document.getElementById('sign-in-err').innerHTML = '';
+
     const fullName = document.querySelector('[name="fullName"]').value;
     const email = document.querySelector('[name="email"]').value;
     const password = document.querySelector('[name="password"]').value;
@@ -189,7 +191,11 @@ route("/signUp", () => {
     } else {
       service.signUp(fullName, email, password)
       .then(r => window.location.href = "/")
-      .catch(err => console.log(err));
+      .catch(error => {
+        if (error && error.message) {
+          document.getElementById('sign-in-err').innerHTML = error.message;
+        }
+      });
     }
   })
   
@@ -201,13 +207,17 @@ route("/signIn", () => {
   
   document.getElementById("signIn-form").addEventListener("submit", async e => {
     e.preventDefault();
-    const email = document.querySelector('[name="email"]').value;
-    const password = document.querySelector('[name = "password"]').value;
-    service.signIn(email, password).then(r => {
+    document.getElementById('sign-in-err').innerHTML = '';
+    try {
+      const email = document.querySelector('[name="email"]').value;
+      const password = document.querySelector('[name = "password"]').value;
+      await service.signIn(email, password);
       window.location.href = "/";
-    }).catch(err => {
-      document.getElementById("password-err").innerText = err.message
-    })
+    } catch (error) {
+      if (error && error.message) {
+        document.getElementById('sign-in-err').innerHTML = error.message;
+      }
+    }
   })
 });
 
