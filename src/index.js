@@ -193,7 +193,7 @@ route("/signUp", () => {
       .then(r => window.location.href = "/")
       .catch(error => {
         if (error && error.message) {
-          document.getElementById('sign-in-err').innerHTML = error.message;
+          document.getElementById('sign-up-err').innerHTML = error.message;
         }
       });
     }
