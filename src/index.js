@@ -179,7 +179,7 @@ route("/signUp", () => {
   riot.mount("signUp", {});
   document.getElementById("signUp-form").addEventListener("submit", (e) => {
     e.preventDefault();
-    document.getElementById('sign-in-err').innerHTML = '';
+    document.getElementById('sign-up-err').innerHTML = '';
 
     const fullName = document.querySelector('[name="fullName"]').value;
     const email = document.querySelector('[name="email"]').value;
@@ -187,7 +187,7 @@ route("/signUp", () => {
     const confirmPassword = document.querySelector('[name="confirmPassword"]').value;
 
     if (password != confirmPassword) {
-      document.getElementById("confirmPassword-err").innerText = "password miss match";
+      document.getElementById("sign-up-err").innerText = "password miss match";
     } else {
       service.signUp(fullName, email, password)
       .then(r => window.location.href = "/")
