@@ -2,6 +2,8 @@ import './mx.css';
 import './index.css';
 import riot from 'riot';
 import 'riot-hot-reload';
+import mxModal from "./mx";
+const { initModal } = mxModal;
 import "./components/app.tag";
 import "./components/signUp.tag";
 import "./components/signIn.tag";
@@ -70,12 +72,14 @@ route("/upload", async () => {
 
   const user = await service.checkAuth();
   
+  
   if (!user) {
     root.innerHTML = "<pleaseSignIn></pleaseSignIn>";
     riot.mount("pleaseSignIn");
   } else {
     root.innerHTML = "<upload></upload>";
     riot.mount("upload");
+    
 
     const schema = yup.object().shape({
       title: yup.string().required("title is required").max(100),
@@ -128,7 +132,16 @@ route("/upload", async () => {
           } else elem.innerText = '';
         });
       } else {
-        service.uploadFile(formData).then(r => window.location.reload());
+        service.uploadFile(formData).then(r => {
+          const modalElement = document.querySelector(".mx-modal");
+          const modal = initModal(modalElement);
+          modal.open();
+          document.querySelector(".mx-modal .button").addEventListener("click", e => {
+            modal.close();
+            window.location.href = "/#";
+          })
+        });
+        
       }
   
     });

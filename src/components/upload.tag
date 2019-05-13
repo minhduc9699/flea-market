@@ -5,6 +5,7 @@
       <p class="text-grey text-125"> Let us ask you a few questions </p>
     </div>
     <div class="box emotion">
+      
       <p>How do you feel right now?</p>
       <div class="grid-spaceBetween no-margin">
         <div class="grid-column-middle-spaceBetween no-margin col">
@@ -109,4 +110,15 @@
       <button id="submit-button" class="button">sell it</button>
     </div>
   </form>
+
+  <div class="mx-modal">
+    <div class="grid-middle-center">
+      <img src="/assets/success.png" alt="">
+    </div>
+    <div class="text-center">
+      <p>Upload Successfully!</p>
+      <p>Feel any better?</p>
+      <button class="button">Back to homepage</button>
+    </div>
+  </div>
 </upload>

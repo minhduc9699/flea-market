@@ -651,3 +651,31 @@ p .error-message {
   background: #ffffff;
   color: #35CE97;
 }
+
+.mx-modal {
+  z-index: 99999;
+  padding: 40px 124px;
+}
+
+.mx-modal p:first-child {
+  color: #4F4F4F;
+  font-size: 2rem;
+  line-height: 38px;
+  margin-bottom: 4px;
+}
+
+.mx-modal p:nth-child(2) {
+  color: #828282;
+  font-size: 1.25rem;
+  line-height: 24px;
+  margin-top: 4px;
+  margin-bottom: 24px;
+}
+
+.mx-modal .button {
+  width: 14rem;
+}
+
+.mx-modal-overlay {
+  z-index: 99998;
+}
