@@ -235,12 +235,27 @@ route("/", () => {
     currentCategory: currentCategory,
     currentEmotion: currentEmotion,
     showAllProduct: service.paginate,
+    drowDownOpen: false,
     perPage: query.get('perPage') || 9,
     categories : ["All Products", "Accessories", "Boys Stuff", "Bridal", "Girls Stuff", "Jewelry", "Weird Stuff", "Random Stuff"],
     emotions : ["All Emotions", "Heartbroken", "Shocked", "Angry", "On The Bound", "Better Than Ever"],
   });
 
   const that = app[0];
+  console.log(
+    document.getElementById("open-drop-down"))
+  document.getElementById("open-drop-down").addEventListener('click', function(e) {
+    e.preventDefault();
+    console.log("aaa")
+    that.opts.drowDownOpen = true;
+    that.update();
+  });
+
+  document.getElementById("close-drop-down").addEventListener('click', (e) => {
+    e.preventDefault();
+    that.opts.drowDownOpen = false;
+    that.update();
+  });
 
   const getProducts = async (page) => {
     const { currentCategory, currentEmotion } = that.opts;

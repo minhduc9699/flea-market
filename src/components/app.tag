@@ -1,45 +1,57 @@
 <app class="app">
   
-  <div class="hight-light grid-center no-margin">
-    <div class="clock-box col-4">
-      <img src="/assets/dongho1.jpg" alt="">
-      <span> Never like it anyway </span>
-    </div>  
-    <div class="clock-box col-4">
-      <img src="/assets/dongho2.jpg" alt="">
-      <span> Never like it anyway </span>
-    </div>
-    <div class="clock-box col-4">
-      <img src="/assets/dongho3.jpg" alt="">
-      <span> Never like it anyway </span>
+  <div class="mx-menu-wrapper">
+    <div class="grid-center no-margin hight-light">
+      <div class="clock-box mx-menu-wrapper-item col-4 col_xs-11">
+        <img src="/assets/dongho1.jpg" alt="">
+        <span> Never like it anyway </span>
+      </div>  
+      <div class="clock-box mx-menu-wrapper-item col-4 col_xs-11">
+        <img src="/assets/dongho2.jpg" alt="">
+        <span> Never like it anyway </span>
+      </div>
+      <div class="clock-box mx-menu-wrapper-item col-4 col_xs-11">
+        <img src="/assets/dongho3.jpg" alt="">
+        <span> Never like it anyway </span>
+      </div>
     </div>
   </div>
 
   <div class="grid no-margin">
-    <div class="filter col-3">
-      <p>Filter</p>
-      <ul>
-        <li each="{category in opts.categories}"
-        class="{opts.currentCategory == category ? 'active' : '' }">
-          <span></span>
-          <a role="button" onclick="{() => opts.setFilter('Category', category)}">{category}</a>
-        </li>
-        
-      </ul>
-      <ul>
-        <li each="{emo in opts.emotions}"
-        class="{opts.currentEmotion == emo ? 'active' : ''}">
-          <span></span>
-          <a role="button" onclick="{() => opts.setFilter('Emotion', emo)}">{emo}</a>
-        </li>
-      </ul>
+    <div class="filter drop-down {opts.drowDownOpen ? 'open' : ''} col-3 col_xs-12">
+      <p>
+        Filter
+        <a id="open-drop-down" class="drop-down-arrow-close" href="#">
+          <object data="/assets/arrow-down.svg" type=""></object>
+        </a>
+        <a id="close-drop-down" class="drop-down-arrow-open" href="#">
+          <object data="/assets/arrow-up.svg" type=""></object>
+        </a>
+      </p>
+      <div class="drop-down-menu">
+        <ul>
+          <li each="{category in opts.categories}"
+          class="{opts.currentCategory == category ? 'active' : '' }">
+            <span></span>
+            <a role="button" onclick="{() => opts.setFilter('Category', category)}">{category}</a>
+          </li>
+          
+        </ul>
+        <ul>
+          <li each="{emo in opts.emotions}"
+          class="{opts.currentEmotion == emo ? 'active' : ''}">
+            <span></span>
+            <a role="button" onclick="{() => opts.setFilter('Emotion', emo)}">{emo}</a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="products col-9">
+    <div class="products col-9 col_xs-12">
       <div class="products-title">
         <p><span></span>All Products({opts.total})</p>
       </div>
       <div class="grid">
-        <a href="/#/detail/{product._id}" class="col-4 product-item" each="{product in opts.products}">
+        <a href="/#/detail/{product._id}" class="col-4 col_xs-6 product-item" each="{product in opts.products}">
           <div class="product-image">
             <img class="product-emotion" src="/assets/heartbroken.png" alt="">
             <img src={product.imgUrls[0]} >

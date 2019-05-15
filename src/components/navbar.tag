@@ -1,9 +1,9 @@
 <navbar>
-  <nav class="navbar grid fullwidth">
-    <a href="/#" class="nav-brand grid-middle-left col-4">
+  <nav class="navbar grid-middle fullwidth">
+    <a href="/#" class="nav-brand grid-middle-left col-4 col_xs-12">
       <img src="/assets/logo.png" />
     </a>
-    <ul class="nav-menu middle-menu grid-middle-center col-4">
+    <ul class="nav-menu middle-menu grid-middle-center col-4 col_xs-12">
       <li class="nav-item {opts.view == 'homepage' ? 'active' : ''}">
         <a href="/#">
           Buy it
@@ -21,12 +21,12 @@
       </li>
     </ul>
     <ul class="nav-menu right-menu grid-middle-right col-4">
-      <li if="{!opts.userDisplayName}" class="nav-item">
+      <li if="{!opts.userDisplayName}" class="nav-item xs-hidden">
         <a href="/#signUp" id="sign-up">
           Sign up
         </a>
       </li>
-      <li if="{!opts.userDisplayName}" class="nav-item">
+      <li if="{!opts.userDisplayName}" class="nav-item xs-hidden">
         <a href="/#signIn" id="sign-in">
           Sign in
         </a>

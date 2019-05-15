@@ -1,7 +1,13 @@
 <footerComponent>
   <footer class="footer">
     <div class="grid fullwidth no-margin">
-      <div class="col-2">
+      <div class="col_xs-12 lg-hidden xs-show">
+        <div class="text-center">
+          <img src="/assets/logo.png" alt="">
+          <p class="text-115">by mindx</p>
+        </div>
+      </div>
+      <div class="col-2 col_xs-12">
         <ul>
           <li><a href="#">About Us</a></li>
           <li><a href="#">Mindx School</a></li>
@@ -10,7 +16,7 @@
           <li><a href="#">Help</a></li>
         </ul>
       </div>
-      <div class="col-2">
+      <div class="col-2 col_xs-12">
         <ul>
           <li><a href="#">Info</a></li>
           <li><a href="#">FAQ</a></li>
@@ -18,13 +24,13 @@
           <li><a href="#">Legal</a></li>
         </ul>
       </div>
-      <div class="col-4">
+      <div class="col-4 xs-hidden">
         <div class="text-center">
           <img src="/assets/logo.png" alt="">
           <p class="text-115">by mindx</p>
         </div>
       </div>
-      <div class="col-4">
+      <div class="col-4 col_xs-12">
         <ul class="grid-right media">
           <li><img src="/assets/facebook.png" alt=""></li>
           <li><img src="/assets/twitter.png" alt=""></li>
