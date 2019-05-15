@@ -20,6 +20,9 @@ const setQueries = (queries) => {
 }
 
 const getProducts = async (that, page) => {
+  that.opts.loading = 'loading';
+  that.update();
+  
   const { currentCategory, currentEmotion } = that.opts;
   const queries = {
     category: currentCategory,
@@ -50,6 +53,7 @@ const getProducts = async (that, page) => {
   that.opts.currentPage = page;
   that.opts.drowDownOpen = false;
   that.opts.totalPage = Math.ceil(total / that.opts.perPage) > 0 ? Math.ceil(total / that.opts.perPage) : 1;
+  that.opts.loading = '';
   that.update();
 }
 

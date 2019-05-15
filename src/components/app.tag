@@ -47,6 +47,7 @@
         <p><span></span>All Products({opts.total})</p>
       </div>
       <div class="grid">
+        <loading class="{opts.loading}"></loading>
         <a href="/#/detail/{product._id}" class="col-4 col_xs-6 product-item" each="{product in opts.products}">
           <div class="product-image">
             <img class="product-emotion" src="/assets/{product.emotion}.png" alt="">

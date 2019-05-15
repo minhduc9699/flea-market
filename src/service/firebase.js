@@ -126,9 +126,6 @@ class FirebaseModel {
 
 }
 
-
-
-
 const model = {
   userProfile: new FirebaseModel("userProfiles"),
   product: new FirebaseModel("products"),

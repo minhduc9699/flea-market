@@ -6,6 +6,7 @@ import route from "riot-route";
 import service from './service/firebase';
 import controller from './controller';
 
+import './components/loading.tag';
 import './components/navbar.tag';
 import './components/footerComponent.tag';
 

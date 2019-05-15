@@ -40,7 +40,7 @@
       </div>
     </div>
     <div class="grid fullwidth no-margin">
-      <div class="copyright col-12 no-margin">
+      <div class="copyright col-12">
         <p class="no-margin">© 2019 Get Over X Company privacy policy - terms and conditions.</p>
       </div>
     </div>
