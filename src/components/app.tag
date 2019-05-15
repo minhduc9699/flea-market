@@ -19,14 +19,10 @@
 
   <div class="grid no-margin">
     <div class="filter drop-down {opts.drowDownOpen ? 'open' : ''} col-3 col_xs-12">
-      <p>
+      <p onclick="{opts.toggleDrowDown}">
         Filter
-        <a id="open-drop-down" class="drop-down-arrow-close" href="#">
-          <object data="/assets/arrow-down.svg" type=""></object>
-        </a>
-        <a id="close-drop-down" class="drop-down-arrow-open" href="#">
-          <object data="/assets/arrow-up.svg" type=""></object>
-        </a>
+        <img class="drop-down-arrow-close" src="/assets/arrow-down.svg" type="">
+        <img class="drop-down-arrow-open" src="/assets/arrow-up.svg" type="">
       </p>
       <div class="drop-down-menu">
         <ul>

@@ -32,4 +32,4 @@ function waitFor(seconds) {
   });
 }
 
-export default { initModal };
+export default initModal;

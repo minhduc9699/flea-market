@@ -104,11 +104,12 @@
         <textarea type="text" name="reason" id="reason" placeholder="Write something nice here"></textarea>
         <p id="reason-err" class="error-message"></p>
       </div>
+      <div class="text-center submit">
+        <button id="submit-button" class="button">sell it</button>
+      </div>
     </div>
 
-    <div class="text-center submit">
-      <button id="submit-button" class="button">sell it</button>
-    </div>
+    
   </form>
 
   <div class="mx-modal grid-middle-center">

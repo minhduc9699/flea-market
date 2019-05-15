@@ -81,7 +81,8 @@ nav.navbar .nav-menu {
 
 .user-display-name {
   display: block;
-  margin-left: 16px;
+  margin: 0;
+  padding: 1rem 0;
   color: var(--dark-gray);
 }
 
@@ -104,19 +105,11 @@ nav.navbar .nav-menu {
 }
 
 .right-menu .nav-item a {
-    margin: 0px 7px;
-    position: relative;
-    padding: 8px 16px;
-}
-
-#sign-up {
-    color: var(--dark-light-grey);
-}
-
-#sign-in {
-  color: var(--green);
-  border: 1px solid var(--green);
-  border-radius: 88px;
+  margin: 0px 7px;
+  position: relative;
+  padding: 8px 16px;
+  color: var(--dark-light-grey);
+  display: block;
 }
 
 #search {
@@ -298,7 +291,6 @@ select::after {
 }
 
 .submit {
-  padding: 40px 60px;
 }
 
 ul {
@@ -406,11 +398,13 @@ p.error-message {
   margin: 0;
   padding: 0;
   display: block;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: -webkit-paged-y;
 }
 
 .filter {
   padding: 0;
+  margin-bottom: 24px;
 }
 
 .filter > p {
@@ -425,6 +419,18 @@ p.error-message {
   position: relative;
 }
 
+.navbar .drop-down {
+  display: none;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 60px;
+}
+
+.navbar .drop-down.open {
+  display: block;
+}
+
 .drop-down .drop-down-arrow-close,
 .drop-down.open .drop-down-arrow-open {
   display: block;
@@ -433,6 +439,19 @@ p.error-message {
 .drop-down.open .drop-down-arrow-close,
 .drop-down .drop-down-arrow-open {
   display: none;
+}
+
+.drop-down .drop-down-menu {
+  display: none;
+  position: absolute;
+  width: 100%;
+  background: #F2F2F2;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.24);
+  z-index: 1;
+}
+
+.drop-down.open .drop-down-menu {
+  display: block;
 }
 
 .products {
@@ -444,8 +463,8 @@ p.error-message {
 }
 
 .filter p {
+  user-select: none;
   margin: 0;
-  margin-bottom: 24px;
   color: var(--light-grey);
   line-height: 24px;
   font-size: 1.25rem;
@@ -491,10 +510,6 @@ p.error-message {
   width: 4px;
   height: 19px;
   border-radius: 0;
-}
-
-.products-title {
-  
 }
 
 .products-title span {
@@ -755,6 +770,12 @@ ul.grid-right.media {
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
+  #sign-in {
+    color: var(--green);
+    border: 1px solid var(--green);
+    border-radius: 88px;
+  }
+
   body {
     padding-top: 70px; 
   }
@@ -811,6 +832,36 @@ ul.grid-right.media {
 
   .product-item .product-owner {
     font-size: 14px;
+  }
+
+  .filter > p {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+  }
+  
+  .drop-down .drop-down-arrow-close,
+  .drop-down.open .drop-down-arrow-open,
+  .drop-down.open .drop-down-arrow-close,
+  .drop-down .drop-down-arrow-open {
+    display: none;
+  }
+  
+  .navbar .drop-down {
+    display: block;
+    position: static;
+  }
+  
+  .navbar .drop-down .drop-down-menu {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .drop-down .drop-down-menu {
+    display: block;
+    position: relative;
+    background: transparent;
+    box-shadow: none;
   }
 } 
 
