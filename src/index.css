@@ -118,6 +118,7 @@ nav.navbar .nav-menu {
 
 upload.upload {
   margin: 0;
+  margin-bottom: 78px;
 }
 
 .box {
@@ -558,6 +559,8 @@ p.error-message {
   left: 0;
   width: 25px;
   height: 25px;
+  padding: 0;
+  z-index: 1;
   /* box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.24); */
   border-radius: 100%;
   transform: none;
@@ -637,10 +640,16 @@ p.error-message {
 
 .detail-images img {
   max-width: 100%;
+  min-width: 100%;
 }
 
 .big-img {
   padding: 24px 60px;
+}
+
+.small-img img {
+  min-height: 200px;
+  max-height: 200px;
 }
 
 .detail-info {
@@ -666,6 +675,10 @@ p.error-message {
   color: #35CE97;
   margin: 40px 0 16px;
   display: block;
+}
+
+.detail-emotion {
+  margin-left: 28px;
 }
 
 .button.get-contact {
