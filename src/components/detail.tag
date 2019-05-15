@@ -25,7 +25,7 @@
       <span class="detail-price">{Number(opts.product.price).toLocaleString('vi')}đ</span>
       <div class="no-margin grid-middle">
         <button class="button get-contact">Reveal contact info</button>
-        <img class="product-emotion" src="/assets/heartbroken.png" alt="">
+        <img class="detail-emotion" src="/assets/{opts.product.emotion}.png" alt="">
       </div>
       <div class="detail-description">
         <h3 class="title">I'm Selling...</h3>

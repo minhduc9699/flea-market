@@ -5,7 +5,6 @@
       <p class="text-grey text-125"> Let us ask you a few questions </p>
     </div>
     <div class="box emotion">
-      
       <p>How do you feel right now?</p>
       <div class="grid-spaceBetween no-margin">
         <div class="grid-column-middle-spaceBetween no-margin col">
@@ -124,5 +123,4 @@
       </div>
     </div>
   </div>
-  
 </upload>
