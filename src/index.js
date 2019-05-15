@@ -15,11 +15,11 @@ const root = document.getElementById("root");
 
 
 route.base("#");
-riot.mount("*", {
+riot.mount("*", {});
+const navbar = riot.mount("navbar", {
   view: '',
   userDisplayName: ''
 });
-const navbar = riot.mount("navbar", {});
 service.checkAuth().then(user => {
   if (user && user.displayName) {
     navbar[0].opts.userDisplayName = user.displayName;
