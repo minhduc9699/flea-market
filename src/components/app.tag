@@ -48,7 +48,7 @@
       </div>
       <div class="grid">
         <loading class="{opts.loading}"></loading>
-        <a href="/#/detail/{product._id}" class="col-4 col_xs-6 product-item" each="{product in opts.products}">
+        <a href="/detail/{product._id}" class="col-4 col_xs-6 product-item" each="{product in opts.products}">
           <div class="product-image">
             <img class="product-emotion" src="/assets/{product.emotion}.png" alt="">
             <img src={product.imgUrls[0]} >

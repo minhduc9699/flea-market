@@ -36,7 +36,7 @@ const uploadController = (riot, root, navbar) => async () => {
         modal.open();
         document.querySelector(".mx-modal .button").addEventListener("click", e => {
           modal.close();
-          window.location.href = "/#";
+          window.location.href = "/";
         })
       });
     });

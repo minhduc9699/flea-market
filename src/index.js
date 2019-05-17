@@ -12,7 +12,7 @@ import './components/footerComponent.tag';
 
 const root = document.getElementById("root");
 
-route.base("#");
+route.base("/");
 riot.mount("*", {});
 const navbar = riot.mount("navbar", {
   view: '',
@@ -31,9 +31,9 @@ service.checkAuth().then(user => {
     navbar[0].update();
   }
 });
-route("/", controller.appController(riot, root, navbar));
 route("/detail/*", controller.detailController(riot, root, navbar));
 route("/upload", controller.uploadController(riot, root, navbar));
 route("/signUp", controller.signUp(riot, root));
 route("/signIn", controller.signIn(riot, root));
+route("/..", controller.appController(riot, root, navbar));
 route.start(true);

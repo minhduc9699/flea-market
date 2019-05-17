@@ -11,11 +11,10 @@ const setQueries = (queries) => {
     else if (value) currentQueries.set(key, value)
     else currentQueries.delete(key);
   }
-
   window.history.replaceState(
     "",
     "",
-    `${url.origin}${url.pathname}?${currentQueries.toString()}`
+    `${url.origin}?${currentQueries.toString()}`
   );
 }
 
