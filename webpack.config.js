@@ -66,7 +66,8 @@ module.exports = {
       chunkFilename: "[id].css"
     }),
     new CopyPlugin([
-      { from: './src/assets', to: './assets' }
+      { from: './src/assets', to: './assets' },
+      { from: './src/_redirects', to: './_redirects', toType: 'file', }
     ]),
   ],
   devServer: {
