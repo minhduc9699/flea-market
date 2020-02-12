@@ -32,4 +32,5 @@ function waitFor(seconds) {
   });
 }
 
+
 export default initModal;
